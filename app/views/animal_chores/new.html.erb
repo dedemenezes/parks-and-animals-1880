@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>Which chore was completed?</h1>
+  <%= simple_form_for([@animal, @animal_chore]) do |f| %>
+    <%= f.association :chore %>
+    <%= f.submit class: 'btn btn-magic'%>
+  <% end %>
+</div>

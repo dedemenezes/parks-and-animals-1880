@@ -18,5 +18,7 @@ Rails.application.routes.draw do
   resources :parks, only: [:show] do
     resources :animals, only: [:create]
   end
-  resources :animals, only: :destroy
+  resources :animals, only: :destroy do
+    resources :animal_chores, only: [:new, :create]
+  end
 end
