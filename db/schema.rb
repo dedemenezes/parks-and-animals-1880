@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_27_203448) do
+ActiveRecord::Schema[7.2].define(version: 2024_11_28_201208) do
+  create_table "animal_chores", force: :cascade do |t|
+    t.integer "animal_id", null: false
+    t.integer "chore_id", null: false
+    t.date "completed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["animal_id"], name: "index_animal_chores_on_animal_id"
+    t.index ["chore_id"], name: "index_animal_chores_on_chore_id"
+  end
+
   create_table "animals", force: :cascade do |t|
     t.string "name"
     t.string "image_url"
@@ -20,6 +30,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_27_203448) do
     t.index ["park_id"], name: "index_animals_on_park_id"
   end
 
+  create_table "chores", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "parks", force: :cascade do |t|
     t.string "name"
     t.string "banner_url"
@@ -27,5 +43,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_27_203448) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "animal_chores", "animals"
+  add_foreign_key "animal_chores", "chores"
   add_foreign_key "animals", "parks"
 end
